@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -9,12 +10,25 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+        body: Stack(
+          children: [
+          Positioned(
+            top: 50,
+            left: 0,
+            child: TableCalendar(
+                firstDay: DateTime(2000, 1, 1),
+                lastDay: DateTime(2100, 12, 31),
+                focusedDay: DateTime.now(),
+                currentDay: DateTime.now(),
+                onDaySelected: (selectedDay, focusedDay) => {
+                  Text('Selected day: $selectedDay, Focused day: $focusedDay'),
+                }
+              ),
+          ),
+        ])
+      )
+      );
   }
 }
