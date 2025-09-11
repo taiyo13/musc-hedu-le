@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 void main() {
@@ -16,14 +15,23 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child:TableCalendar(
-            firstDay: DateTime(2000, 7, 13),
-            lastDay: DateTime(2025, 12, 31),
-            focusedDay: DateTime.now(),
-            currentDay:   DateTime.now(),
-        ),
-      ),
-    ));
+        body: Stack(
+          children: [
+          Positioned(
+            top: 50,
+            left: 0,
+            child: TableCalendar(
+                firstDay: DateTime(2000, 1, 1),
+                lastDay: DateTime(2100, 12, 31),
+                focusedDay: DateTime.now(),
+                currentDay: DateTime.now(),
+                onDaySelected: (selectedDay, focusedDay) => {
+                  Text('Selected day: $selectedDay, Focused day: $focusedDay'),
+                }
+              ),
+          ),
+        ])
+      )
+      );
   }
 }
