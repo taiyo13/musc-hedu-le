@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(MainApp());
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+  MainApp({super.key});
+
+  DateTime now = DateTime.now();
+  
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Text('Hello World!'),
+          child:TableCalendar(
+            firstDay: DateTime(2000, 7, 13),
+            lastDay: DateTime(2025, 12, 31),
+            focusedDay: DateTime.now(),
+            currentDay:   DateTime.now(),
         ),
       ),
-    );
+    ));
   }
 }
